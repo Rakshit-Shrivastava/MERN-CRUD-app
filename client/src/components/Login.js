@@ -53,7 +53,7 @@ const Login = () => {
         <button className='login_btn' onClick={auth === 'Signin'? ()=>{login()} : ()=>{createUser()} }>{auth}</button>
         </div>
         {
-            auth === 'Signin' ? <h6 onClick={()=>{setAuth('Signup')}}>Don't have an account, Signup</h6> : <h6 onClick={()=>{setAuth('Signin')}}>Already have an acount, Signin</h6>
+            auth === 'Signin' ? <h6 style={{cursor: 'pointer'}} onClick={()=>{setAuth('Signup')}}>Don't have an account, Signup</h6> : <h6 style={{cursor: 'pointer'}} onClick={()=>{setAuth('Signin')}}>Already have an acount, Signin</h6>
         }
     </div>
   )

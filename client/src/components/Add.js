@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -11,6 +11,12 @@ const Add = () => {
   const [photo, setPhoto] = useState('');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/login');
+    }
+  }, []);
 
   var formData = new FormData();
   formData.append('name', name);
