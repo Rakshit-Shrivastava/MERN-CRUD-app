@@ -8,6 +8,7 @@ const Login = () => {
 
     const navigate = useNavigate();
 
+    // api call for login
     const login = async () => {
       const response = await fetch('http://localhost:3000/user/auth/login', {
         method: 'POST',
@@ -26,6 +27,7 @@ const Login = () => {
       };
     }
 
+    // api call for creating user
     const createUser = async () => {
       console.log('inside creatuser')
       const response = await fetch('http://localhost:3000/user/auth/createUser', {

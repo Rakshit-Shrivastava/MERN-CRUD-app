@@ -4,10 +4,11 @@ import { useLocation } from 'react-router-dom';
 const View = () => {
     const [profile, setprofile] = useState([]);
 
+    // getting the id from home component
     const location = useLocation();
     const { id } = location.state;
 
-
+    // api call for reading profile from database
     const readProfile = async () => {
         const response = await fetch('http://localhost:3000/user/profile/readProfile', {
             method: 'POST',
@@ -20,10 +21,12 @@ const View = () => {
         setprofile(data);
     }
 
+    // call funtion when component load
     useEffect(() => {
         readProfile();
     }, []);
 
+    // filtering user in the basis of id coming from home component
     const a = profile.filter((ele) => {
         return ele._id === id;
     });

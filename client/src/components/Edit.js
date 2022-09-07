@@ -9,6 +9,7 @@ const Add = () => {
     const [address, setAddress] = useState('');
     const [photo, setPhoto] = useState('');
 
+    //creating formdata multi/part for file upload
     var formData = new FormData();
     formData.append('name', name);
     formData.append('age', age);
@@ -17,10 +18,12 @@ const Add = () => {
     formData.append('photo', photo);
 
     const navigate = useNavigate();
+
+    // using location hook to get id from link state
     const location = useLocation();
     const { id } = location.state;
 
-
+    // api call to read profile from data base and to display it to frontend
     const readProfile = async () => {
         const response = await fetch('http://localhost:3000/user/profile/readProfile', {
             method: 'POST',
@@ -33,28 +36,23 @@ const Add = () => {
         setprofile(data);
     }
 
+    // rendering component only one time
     useEffect(() => {
         readProfile();
     }, []);
 
+    // filltering id that is coming from home component among all the ids.
     const a = profile.filter((ele) => {
         return ele._id === id;
     });
 
-
-
-    //     for (var pair of formData.entries())
-    // {
-    //  console.log(pair[0]+ ', '+ pair[1]); 
-    // }
-
+    // api call to update profile data onto database
     const updateProfile = async () => {
         const response = await fetch(`http://localhost:3000/user/profile/updateProfile/${id}`, {
             method: 'PUT',
             headers: {
                 "token": localStorage.getItem('token')
             },
-            // body: JSON.stringify({ name, age, contact, address, photo })
             body: formData
         });
         const data = await response.json();
@@ -71,7 +69,6 @@ const Add = () => {
                 a.map((ele) => {
                     const base64String = btoa(
                         String.fromCharCode(...new Uint8Array(ele.photo.data.data))
-                        // String.fromCharCode.apply(null, new Uint8Array(ele.photo.data.data))
                     )
                     return <div className='form_container' key={ele._id}>
                         <div className='edit_container'>

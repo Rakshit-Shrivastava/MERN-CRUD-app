@@ -5,6 +5,7 @@ const fetchuser = require('../middleware/fetchuser');
 const multer = require('multer');
 const fs = require('fs');
 
+// creating storage engine
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads')
@@ -14,6 +15,7 @@ const storage = multer.diskStorage({
     }
 })
 
+// creating experssion out of multer function
 const upload = multer({
     storage: storage
 })

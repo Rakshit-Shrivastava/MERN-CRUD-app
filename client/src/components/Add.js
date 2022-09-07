@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const Add = () => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
@@ -12,12 +10,14 @@ const Add = () => {
 
   const navigate = useNavigate();
 
+  // rendering component on the basic of token
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       navigate('/login');
     }
   }, []);
 
+  // creating formdata multi/part for file upload
   var formData = new FormData();
   formData.append('name', name);
   formData.append('age', age);
@@ -26,6 +26,7 @@ const Add = () => {
   formData.append('photo', photo);
 
 
+  // api call to create a new profile and upload it to the database
   const createProfile = async () => {
     const response = await fetch('http://localhost:3000/user/profile/createProfile', {
       method: 'POST',
@@ -37,6 +38,7 @@ const Add = () => {
     const data = await response.json();
     navigate('/');
   }
+
   return (
     <div className='add_container'>
       <div className='add_title'>

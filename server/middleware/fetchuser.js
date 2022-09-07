@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = "rakhitshrivastava2698@gmail.com";
 
+// a fuction that takes token from header and verfiy the token and return user
 function fetchuser(req, res, next) {
     const token = req.header('token');
     if (!token) {

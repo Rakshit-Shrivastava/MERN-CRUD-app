@@ -7,6 +7,7 @@ const Home = () => {
 
   const navigate = useNavigate();
 
+  // api call to read all the profiles from database
   const readProfile = async () => {
     const response = await fetch('http://localhost:3000/user/profile/readProfile', {
       method: 'POST',
@@ -19,6 +20,7 @@ const Home = () => {
     setprofile(data);
   }
 
+  // contitional rendering of the component
   useEffect(() => {
     if (localStorage.getItem('token')) {
       readProfile();
@@ -27,6 +29,7 @@ const Home = () => {
     }
   }, []);
 
+  // api call to delete the profile
   const deleteProfile = async (id) => {
     const response = await fetch(`http://localhost:3000/user/profile/deleteProfile/${id}`, {
       method: 'DELETE',
@@ -39,6 +42,7 @@ const Home = () => {
     setDeleteprofile(data);
   }
 
+  // rendering component on the basis of delete state
   useEffect(() => {
     readProfile();
   }, [deleteprofile]);
