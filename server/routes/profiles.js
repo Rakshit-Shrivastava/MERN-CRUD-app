@@ -28,11 +28,17 @@ router.post('/createProfile', upload.single('photo'), fetchuser, async (req, res
         return res.status(409).json({ message: "Profile already exists" });
     }
     try {
-        const newProfile = await Profile({ name, age, contact, address, photo: { data: fs.readFileSync('uploads/' + req.file.filename), contentType: 'image/png' }, user: req.user.id }).save();
+        const newProfile = await Profile({ name, age, contact, address, photo: { data: req.file.filename, contentType: 'image/png' }, user: req.user.id }).save();
         res.status(200).json(newProfile);
     } catch (error) {
         console.log("Internal server error", error);
     }
+    // try {
+    //     const newProfile = await Profile({ name, age, contact, address, photo: { data: fs.readFileSync('uploads/' + req.file.filename), contentType: 'image/png' }, user: req.user.id }).save();
+    //     res.status(200).json(newProfile);
+    // } catch (error) {
+    //     console.log("Internal server error", error);
+    // }
 });
 
 // Read all the profiles

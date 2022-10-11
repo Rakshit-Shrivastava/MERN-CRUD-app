@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-// const host = "http://localhost:3000";
-const host = "https://mern-crud-app-dusky.vercel.app";
+import host from '../config';
 
 const Home = () => {
   const [profile, setprofile] = useState([]);

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-// const host = "http://localhost:3000";
-const host = "https://mern-crud-app-dusky.vercel.app";
+import host from '../config';
 
 const View = () => {
     const [profile, setprofile] = useState([]);
@@ -50,19 +49,19 @@ const View = () => {
                         <ul className='list_container'>
                             <li className='input_container'>
                                 <label>Name</label>
-                                <input type='text' value={ele.name} />
+                                <input type='text' defaultValue={ele.name} />
                             </li>
                             <li className='input_container'>
                                 <label>Age</label>
-                                <input type='text' value={ele.age} />
+                                <input type='text' defaultValue={ele.age} />
                             </li>
                             <li className='input_container'>
                                 <label>Contact</label>
-                                <input type='text' value={ele.contact} />
+                                <input type='text' defaultValue={ele.contact} />
                             </li>
                             <li className='input_container'>
                                 <label>Address</label>
-                                <input type='text' value={ele.address} />
+                                <input type='text' defaultValue={ele.address} />
                             </li>
                             {/* <li className='input_container'>
                                 <label>Photo</label>

@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-// const host = "http://localhost:3000";
-const host = "https://mern-crud-app-dusky.vercel.app";
+import host from '../config';
 
 const Login = () => {
     const [auth, setAuth] = useState('Signin');
