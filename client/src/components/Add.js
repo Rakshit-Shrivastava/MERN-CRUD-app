@@ -28,6 +28,9 @@ const Add = () => {
 
   // api call to create a new profile and upload it to the database
   const createProfile = async () => {
+    if(name === '' || age === '' || contact === '' || address === '' || photo === ''){
+      return alert('All fields are required');
+    }
     const response = await fetch('http://localhost:3000/user/profile/createProfile', {
       method: 'POST',
       headers: {
