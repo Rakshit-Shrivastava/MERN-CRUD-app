@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+// const host = "http://localhost:3000";
+const host = "https://mern-crud-app-dusky.vercel.app";
 
 const Login = () => {
     const [auth, setAuth] = useState('Signin');
@@ -10,7 +12,7 @@ const Login = () => {
 
     // api call for login
     const login = async () => {
-      const response = await fetch('http://localhost:3000/user/auth/login', {
+      const response = await fetch(`${host}/user/auth/login`, {
         method: 'POST',
         headers: {
           "content-Type": "application/json",
@@ -30,7 +32,7 @@ const Login = () => {
     // api call for creating user
     const createUser = async () => {
       console.log('inside creatuser')
-      const response = await fetch('http://localhost:3000/user/auth/createUser', {
+      const response = await fetch(`${host}/user/auth/createUser`, {
         method: 'POST',
         headers: {
           "content-Type": "application/json",

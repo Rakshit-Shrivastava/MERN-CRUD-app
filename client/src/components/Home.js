@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+// const host = "http://localhost:3000";
+const host = "https://mern-crud-app-dusky.vercel.app";
 
 const Home = () => {
   const [profile, setprofile] = useState([]);
@@ -9,7 +11,7 @@ const Home = () => {
 
   // api call to read all the profiles from database
   const readProfile = async () => {
-    const response = await fetch('http://localhost:3000/user/profile/readProfile', {
+    const response = await fetch(`${host}/user/profile/readProfile`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +33,7 @@ const Home = () => {
 
   // api call to delete the profile
   const deleteProfile = async (id) => {
-    const response = await fetch(`http://localhost:3000/user/profile/deleteProfile/${id}`, {
+    const response = await fetch(`${host}/user/profile/deleteProfile/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

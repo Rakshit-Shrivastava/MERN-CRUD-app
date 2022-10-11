@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+// const host = "http://localhost:3000";
+const host = "https://mern-crud-app-dusky.vercel.app";
 
 const View = () => {
     const [profile, setprofile] = useState([]);
@@ -10,7 +12,7 @@ const View = () => {
 
     // api call for reading profile from database
     const readProfile = async () => {
-        const response = await fetch('http://localhost:3000/user/profile/readProfile', {
+        const response = await fetch(`${host}/user/profile/readProfile`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

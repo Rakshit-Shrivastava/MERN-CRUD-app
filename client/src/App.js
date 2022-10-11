@@ -12,8 +12,6 @@ import Edit from './components/Edit';
 import View from './components/View';
 import Login from './components/Login';
 
-
-
 function App() {
   return (
     <div className="App">

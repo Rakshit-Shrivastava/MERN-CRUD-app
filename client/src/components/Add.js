@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+// const host = "http://localhost:3000";
+const host = "https://mern-crud-app-dusky.vercel.app";
 
 const Add = () => {
   const [name, setName] = useState('');
@@ -31,7 +33,7 @@ const Add = () => {
     if(name === '' || age === '' || contact === '' || address === '' || photo === ''){
       return alert('All fields are required');
     }
-    const response = await fetch('http://localhost:3000/user/profile/createProfile', {
+    const response = await fetch(`${host}/user/profile/createProfile`, {
       method: 'POST',
       headers: {
         "token": localStorage.getItem('token')

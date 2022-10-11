@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+// const host = "http://localhost:3000";
+const host = "https://mern-crud-app-dusky.vercel.app";
 
 const Add = () => {
     const [profile, setprofile] = useState([]);
@@ -25,7 +27,7 @@ const Add = () => {
 
     // api call to read profile from data base and to display it to frontend
     const readProfile = async () => {
-        const response = await fetch('http://localhost:3000/user/profile/readProfile', {
+        const response = await fetch(`${host}/user/profile/readProfile`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -48,7 +50,7 @@ const Add = () => {
 
     // api call to update profile data onto database
     const updateProfile = async () => {
-        const response = await fetch(`http://localhost:3000/user/profile/updateProfile/${id}`, {
+        const response = await fetch(`${host}/user/profile/updateProfile/${id}`, {
             method: 'PUT',
             headers: {
                 "token": localStorage.getItem('token')
