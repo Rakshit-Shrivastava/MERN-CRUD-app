@@ -6,14 +6,16 @@ const multer = require('multer');
 const fs = require('fs');
 
 // creating storage engine
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
-})
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads')
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.originalname)
+//     }
+// })
+
+const storage = multer.memoryStorage();
 
 // creating experssion out of multer function
 const upload = multer({
@@ -27,18 +29,20 @@ router.post('/createProfile', upload.single('photo'), fetchuser, async (req, res
     if (profileAlreadyExists.length > 0) {
         return res.status(409).json({ message: "Profile already exists" });
     }
-    try {
-        const newProfile = await Profile({ name, age, contact, address, photo: { data: req.file.filename, contentType: 'image/png' }, user: req.user.id }).save();
-        res.status(200).json(newProfile);
-    } catch (error) {
-        console.log("Internal server error", error);
-    }
     // try {
     //     const newProfile = await Profile({ name, age, contact, address, photo: { data: fs.readFileSync('uploads/' + req.file.filename), contentType: 'image/png' }, user: req.user.id }).save();
     //     res.status(200).json(newProfile);
     // } catch (error) {
     //     console.log("Internal server error", error);
     // }
+    try {
+        // console.log("inside try");
+        const newProfile = await Profile({ name, age, contact, address, photo: { data: req.file.buffer, contentType: 'image/png' }, user: req.user.id }).save();
+        // console.log(req.file.buffer);
+        res.status(200).json(newProfile);
+    } catch (error) {
+        console.log("Internal server error", error);
+    }
 });
 
 // Read all the profiles
@@ -60,7 +64,8 @@ router.put('/updateProfile/:id', upload.single('photo'), fetchuser, async (req, 
     if (age) { updateProfile.age = age };
     if (contact) { updateProfile.contact = contact };
     if (address) { updateProfile.address = address };
-    if (req.file) { updateProfile.photo = { data: fs.readFileSync('uploads/' + req.file.filename), contentType: 'image/png' } };
+    if (req.file) { updateProfile.photo = { data: req.file.buffer, contentType: 'image/png' } };
+    // if (req.file) { updateProfile.photo = { data: fs.readFileSync('uploads/' + req.file.filename), contentType: 'image/png' } };
     const profile = await Profile.findById(req.params.id);
     if (!profile) {
         return res.status(404).send("Not found");
@@ -69,7 +74,7 @@ router.put('/updateProfile/:id', upload.single('photo'), fetchuser, async (req, 
         return res.status(401).send("Not allowed");
     }
     try {
-        const newUpdatedProfile = await Profile.findByIdAndUpdate(req.params.id, { $set: updateProfile }, { new: true })
+        const newUpdatedProfile = await Profile.findByIdAndUpdate(req.params.id, { $set: updateProfile }, { new: true });
         res.status(200).json(newUpdatedProfile);
     } catch (error) {
         console.log("Internal server error", error);
