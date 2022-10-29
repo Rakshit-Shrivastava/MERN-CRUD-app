@@ -17,6 +17,9 @@ app.use(express.json());
 app.use(express.static(__dirname+'./uploads'))
 
 // routes for api call
+app.get('/', (req, res)=>{
+    res.send("Hello world");
+})
 app.use('/user/auth', require('./routes/users'));
 app.use('/user/profile', require('./routes/profiles'));
 
